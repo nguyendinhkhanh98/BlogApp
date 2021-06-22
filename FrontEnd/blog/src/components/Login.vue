@@ -5,7 +5,8 @@
         <h2>Login</h2>
     <div class="form-group">
         <label for="email">Email address</label>
-        <input v-model="user.email" type="email" name="email" class="form-control" id="email">
+        <input v-model="user.email" name="email" class="form-control is-invalid" :class="{'is-invalid': errors.email}">
+        <div v-if="errors.email" class="invalid-feedback">{{errors.email[0]}}</div>
     </div>
     <div class="form-group">
         <label>Password</label>
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default{
     data(){
         return{
@@ -26,15 +28,25 @@ export default{
             }
 
         }
+        errors:{}
     },
     methods: {
         login: function(){
-            console.log(this.user);
+            this.loading = true;
+            axios.post('http://localhost/api/login', this.user) 
+            .then(response=> {
+                window.localStorage.setItem('token', response.data.token);
+                this.router.push({name:'dashboard'});
+            })
+            .catch(error=> {
+                this.loading = false;
+                this.errors = error.response.data.errors;
+  });
         }
     }
 }
 </script>
 
 <style>
-
+@import'~bootstrap/dist/css/bootstrap.css'
 </style>

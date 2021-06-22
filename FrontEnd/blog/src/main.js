@@ -11,10 +11,12 @@ import 'bootstrap'
 
 import Login from './components/Login'
 import Register from './components/Register'
+import Dashboard from './components/Dashboard'
 
 const routes = [
-  { path: '/login', component: Login },
-  { path: '/register', component: Register }
+  { path: '/login', component: Login , name: 'login'},
+  { path: '/register', component: Register },
+  { path: '/dashboard', component: Dashboard, name : 'dashboard' },
 ]
 
 const router = new VueRouter({
