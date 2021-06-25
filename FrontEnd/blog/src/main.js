@@ -9,11 +9,13 @@ Vue.use(VueRouter)
 
 import 'bootstrap'
 
+import HomePage from './components/HomePage'
 import Login from './components/Login'
 import Register from './components/Register'
 import Dashboard from './components/Dashboard'
 
 const routes = [
+  { path: '/', component: HomePage , name: 'homepage'},
   { path: '/login', component: Login , name: 'login'},
   { path: '/register', component: Register },
   { path: '/dashboard', component: Dashboard, name : 'dashboard' },
